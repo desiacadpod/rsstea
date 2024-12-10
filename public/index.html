@@ -192,7 +192,7 @@
 const tabs = document.querySelectorAll('.tab');
 const posts = document.querySelectorAll('.post');
 const select = document.querySelector('select[name="changechannel"]');
-let selectedChannel = 'All';
+let selectedChannel = 'All Episodes';
 
 select.addEventListener('change', () =>
 {
@@ -200,7 +200,7 @@ select.addEventListener('change', () =>
     posts.forEach(post =>
     {
         const channel = post.getAttribute('data-channel');
-        if (selectedChannel === 'All' || channel === selectedChannel)
+        if (selectedChannel === 'All Episodes' || channel === selectedChannel)
         {
             post.style.display = 'block';
         }
@@ -231,7 +231,7 @@ tabs.forEach(tab =>
         {
             const audio = parseInt(post.getAttribute('data-audio'));
             const channel = post.getAttribute('data-channel');
-            if (filter === 'All' || (filter === 'Posts' && audio === 0) || (filter === 'Podcasts' && audio === 1))
+            if (filter === 'All Episodes' || (filter === 'Posts' && audio === 0) || (filter === 'Podcasts' && audio === 1))
             {
                 post.style.display = 'block';
             }
@@ -241,7 +241,7 @@ tabs.forEach(tab =>
             }
         });
 
-        select.value = 'All';
+        select.value = 'All Episodes';
         select.classList.remove('selected');
     });
 });
