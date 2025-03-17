@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head>
-    <title>rssTea - RSS Reader Web App Hosted On Github</title>
-    <meta name="description" content="rssTea is a fast, lightweight RSS and podcast Web Viewer that can be hosted On Github Pages."/>
+    <title>Desi Academia Podcast </title>
+    <meta name="description" content="Tune in to hear about cool South Asian researchers and their amazing work!."/>
     <link rel="shortcut icon" href="favicon.ico"> 
   <link rel="icon" href="favicon.png">
 <link rel="manifest" href="manifest.json" />
@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="theme.css" type="text/css">
 </head>
 <body>
-<div id="header">rssTea</div>
+<div id="header">Desi Academia Podcast</div>
     <div id="pcwrap">
-<div id="filter"><div class="pclogo">rssTea</div><span id="filters">
-<span class="tab active">All</span>
-<span class="tab">Posts</span>
-<span class="tab">Podcasts</span>
-<select name="changechannel"><option value="All">All Channels</option><option value="Desi Academia Podcast">Desi Academia Podcast</option></select></span></div>
+<div id="filter"><div class="pclogo">Desi Academia Podcast</div><span id="filters">
+<span class="tab active">All Episodes</span>
+<span class="tab" style="display: none;">Posts</span>
+<span class="tab" style="display: none;">Podcasts</span>
+<select name="changechannel" style="display: none;"><option value="All">All Channels</option><option value="Desi Academia Podcast">Desi Academia Podcast</option></select></span></div>
 <div id="wrap">
 <div class="post" data-channel="Desi Academia Podcast" data-ts="1742091802" data-audio="1"><div class="leftpan"><img src="https://d3t3ozftmdmh3i.cloudfront.net/production/podcast_uploaded/29696027/29696027-1661017736153-0685e72b735e7.jpg" alt="S8E4: Physics masterclass with Superconformal Hassaan"/ ></div><div class="rightpan"><div class="feedname"><span class="channel">Desi Academia Podcast</span> &bull; <span class="date">Mar 16, 2025</span></div>
 <h2><a href="https://podcasters.spotify.com/pod/show/desi-academic-podcast/episodes/S8E4-Physics-masterclass-with-Superconformal-Hassaan-e307j0p" target="_blank">S8E4: Physics masterclass with Superconformal Hassaan</a></h2><div class="audio">
@@ -222,7 +222,7 @@
 const tabs = document.querySelectorAll('.tab');
 const posts = document.querySelectorAll('.post');
 const select = document.querySelector('select[name="changechannel"]');
-let selectedChannel = 'All';
+let selectedChannel = 'All Episodes';
 
 select.addEventListener('change', () =>
 {
@@ -230,7 +230,7 @@ select.addEventListener('change', () =>
     posts.forEach(post =>
     {
         const channel = post.getAttribute('data-channel');
-        if (selectedChannel === 'All' || channel === selectedChannel)
+        if (selectedChannel === 'All Episodes' || channel === selectedChannel)
         {
             post.style.display = 'block';
         }
@@ -261,7 +261,7 @@ tabs.forEach(tab =>
         {
             const audio = parseInt(post.getAttribute('data-audio'));
             const channel = post.getAttribute('data-channel');
-            if (filter === 'All' || (filter === 'Posts' && audio === 0) || (filter === 'Podcasts' && audio === 1))
+            if (filter === 'All Episodes' || (filter === 'Posts' && audio === 0) || (filter === 'Podcasts' && audio === 1))
             {
                 post.style.display = 'block';
             }
@@ -271,7 +271,7 @@ tabs.forEach(tab =>
             }
         });
 
-        select.value = 'All';
+        select.value = 'All Episodes';
         select.classList.remove('selected');
     });
 });
