@@ -38,11 +38,14 @@ echo "\n"."Getting feed from: ". $url." \n";
   
         // 2. Set full path for logo
         $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';
+        echo "Podcast name: $podcastName\n";
+        echo "Logo path: $podcastLogoPath\n";
         
         // 1. Get podcast-level logo
         $podcastLogoUrl = null;
         if (isset($feed->channel->image) && isset($feed->channel->image->url)) {
             $podcastLogoUrl = (string)$feed->channel->image->url;
+            echo "Logo URL from feed: $podcastLogoUrl\n";
     
         // 2. Download and save logo locally
         if ($podcastLogoUrl) {
