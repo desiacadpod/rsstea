@@ -35,17 +35,9 @@ echo "\n"."Getting feed from: ". $url." \n";
         $podcastName = isset($feed->channel->title) ? (string)$feed->channel->title : 'podcast';
         // sanitize podcast name for filename
         $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
-    
-        // 2. Ensure public folder exists
-        $publicDir = __DIR__ . '/public';
-        if (!is_dir($publicDir)) {
-            if (!mkdir($publicDir, 0755, true)) {
-                echo "Error: Failed to create directory $publicDir\n";
-            }
-        }
-    
-        // 3. Set full path for logo
-        $podcastLogoPath = $publicDir . '/' . $safeName . '.png';
+  
+        // 2. Set full path for logo
+        $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';
         
         // 1. Get podcast-level logo
         $podcastLogoUrl = null;
