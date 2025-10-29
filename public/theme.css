@@ -483,3 +483,12 @@ span.tab:hover,select:hover {
     background: var(--lightgrey);
 }
 }
+/* Remove left panel entirely */
+.leftpan {
+    display: none !important;
+}
+
+/* Expand right panel to full width */
+.leftpan + .rightpan {
+    width: 100% !important;
+}
