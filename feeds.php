@@ -30,6 +30,32 @@ echo "\n"."Getting feed from: ". $url." \n";
     $response = str_ireplace(array("media:thumbnail",'<media:group>','</media:group>'), array("thumbnail",'',''), $response);
     $feed = simplexml_load_string($response);
     if ($feed) {
+        // 1. Get podcast-level logo
+        $podcastLogoUrl = null;
+        if (isset($feed->channel->image) && isset($feed->channel->image->url)) {
+            $podcastLogoUrl = (string)$feed->channel->image->url;
+    
+            // 2. Download and save logo locally
+            if ($podcastLogoUrl) {
+                // Only download if file doesn't exist or URL changed
+                $download = true;
+                if (file_exists($podcastLogoPath)) {
+                    // optional: skip download if file already exists
+                    $download = false;
+                }
+    
+                if ($download) {
+                    $logoData = @file_get_contents($podcastLogoUrl);
+                    if ($logoData) {
+                        file_put_contents($podcastLogoPath, $logoData);
+                    } else {
+                        error_log("Failed to fetch podcast logo: $podcastLogoUrl");
+                    }
+                }
+            }
+        }
+    
+        // --- Episode loop ---
         $feedType = strtolower($feed->getName());
         $count = 0;
         if ($feedType === 'rss') {
