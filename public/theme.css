@@ -483,6 +483,29 @@ span.tab:hover,select:hover {
     background: var(--lightgrey);
 }
 }
+
+/* Podcast logo above filter panel */
+#logo-container {
+    text-align: center;       /* Center the logo */
+    padding: 20px 0;          /* Top and bottom spacing */
+}
+
+#logo-container img {
+    max-width: 160px;         /* Keep logo from being too wide */
+    height: auto;             /* Preserve aspect ratio */
+    border-radius: 12px;      /* Optional rounded corners */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Optional subtle shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 720px) {
+    #logo-container img {
+        max-width: 120px;
+        padding: 10px 0;
+    }
+}
+
+
 /* Remove left panel entirely */
 .leftpan {
     display: none !important;
