@@ -29,44 +29,39 @@ echo "\n"."Getting feed from: ". $url." \n";
 
     $response = str_ireplace(array("media:thumbnail",'<media:group>','</media:group>'), array("thumbnail",'',''), $response);
     $feed = simplexml_load_string($response);
+    
     if ($feed) {
-
-        // 1. Get podcast name
         $podcastName = isset($feed->channel->title) ? (string)$feed->channel->title : 'podcast';
-        // sanitize podcast name for filename
         $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
-  
-        // 2. Set full path for logo
         $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';
-        echo "Podcast name: $podcastName\n";
-        echo "Logo path: $podcastLogoPath\n";
         
-        // 1. Get podcast-level logo
+        // --- Fetch podcast logo from <itunes:image> ---
         $podcastLogoUrl = null;
-        if (isset($feed->channel->image) && isset($feed->channel->image->url)) {
-            $podcastLogoUrl = (string)$feed->channel->image->url;
-            echo "Logo URL from feed: $podcastLogoUrl\n";
-    
-        // 2. Download and save logo locally
-        if ($podcastLogoUrl) {
-            // Only download if file doesn't exist or URL changed
-            $download = true;
-            if (file_exists($podcastLogoPath)) {
-                // optional: skip download if file already exists
-                $download = false;
-            }
-
-            if ($download) {
-                $logoData = @file_get_contents($podcastLogoUrl);
-                if ($logoData) {
-                    file_put_contents($podcastLogoPath, $logoData);
-                } else {
-                    error_log("Failed to fetch podcast logo: $podcastLogoUrl");
-                }
-            }
+        $itunes_ns = 'http://www.itunes.com/dtds/podcast-1.0.dtd';
+        $itunesImage = $feed->channel->children($itunes_ns)->image;
+        if ($itunesImage && isset($itunesImage->attributes()->href)) {
+            $podcastLogoUrl = (string)$itunesImage->attributes()->href;
         }
-    }
-    
+        
+        if ($podcastLogoUrl) {
+            echo "Fetching podcast logo from: $podcastLogoUrl\n";
+        
+            // Use file_get_contents or cURL if allow_url_fopen disabled
+            $logoData = @file_get_contents($podcastLogoUrl);
+            if ($logoData) {
+                $result = @file_put_contents($podcastLogoPath, $logoData);
+                if ($result) {
+                    echo "Podcast logo saved to: $podcastLogoPath\n";
+                } else {
+                    echo " Error: Failed to save logo to $podcastLogoPath\n";
+                }
+            } else {
+                echo "Error: Failed to fetch logo data from $podcastLogoUrl\n";
+            }
+        } else {
+            echo "Error: <itunes:image> not found in RSS feed.\n";
+        }
+
         // --- Episode loop ---
         $feedType = strtolower($feed->getName());
         $count = 0;
