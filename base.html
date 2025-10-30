@@ -16,40 +16,44 @@
 
 <div id="pcwrap">
 
-<?php
-// --- Match feed.php logic to generate the exact logo filename ---
-$response = str_ireplace(
-    array("media:thumbnail", '<media:group>', '</media:group>'),
-    array("thumbnail", '', ''),
-    $response
-);
-$feed = @simplexml_load_string($response);
-
-if ($feed) {
-    $podcastName = isset($feed->channel->title) ? (string)$feed->channel->title : 'podcast';
-    $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
-    $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';  // file system path
-    $logoUrl = $safeName . '.png';                           // browser URL
-
-    // Only display if the file exists
-    if (file_exists($podcastLogoPath)):
-?>
-<div id="logo-container">
-    <img src="<?php echo $logoUrl; ?>" alt="<?php echo htmlspecialchars($podcastName); ?>">
-</div>
-<?php
-    endif;
-}
-?>
-
 <!-- Sidebar container: logo above filter panel -->
 <div id="sidebar-container">
     <!-- Logo container -->
-    <?php if (file_exists($podcastLogoPath)): ?>
-    <div id="logo-container">
-        <img src="<?php echo $logoFile; ?>" alt="Podcast Logo">
-    </div>
-    <?php endif; ?>
+    <script>
+    fetch('feed.json')
+      .then(resp => resp.json())
+      .then(data => {
+        if (!data.episodes || data.episodes.length === 0) return;
+
+        // Take the first <item> link
+        const firstLink = data.episodes[0].link || '';
+        let podcastName = 'podcast';
+
+        // Extract podcast name from URL path like feed.php logic
+        const match = firstLink.match(/\/pod\/show\/([^\/]+)\//);
+        if (match && match[1]) podcastName = match[1];
+
+        // Sanitize for filename
+        const safeName = podcastName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+        const logoFile = safeName + '.png';
+
+        // Check if PNG exists in folder
+        fetch(logoFile, { method: 'HEAD' })
+          .then(res => {
+            if (res.ok) {
+              const logoContainer = document.getElementById('logo-container');
+              const img = document.createElement('img');
+              img.src = logoFile;
+              img.alt = podcastName;
+              logoContainer.appendChild(img);
+            } else {
+              console.warn('Logo file not found:', logoFile);
+            }
+          })
+          .catch(err => console.error('Error checking logo file:', err));
+      })
+      .catch(err => console.error('Failed to load feed.json:', err));
+    </script>
 
     <!-- Filter panel -->
     <div id="filter">
