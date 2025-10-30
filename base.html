@@ -13,30 +13,42 @@
 </head>
 <body>
 <div id="header">Desi Academia Podcast</div>
-    <div id="pcwrap">
+
+<div id="pcwrap">
+
 <?php
     // Construct the logo filename (same logic as feed.php)
     $podcastLogoPath = __DIR__ . '/podcast_name.png';
     $logoFile = basename($podcastLogoPath);
 ?>
 
-<!-- Logo container  -->
-<?php if (file_exists($podcastLogoPath)): ?>
+<!-- Sidebar container: logo above filter panel -->
+<div id="sidebar-container">
+    <!-- Logo container -->
+    <?php if (file_exists($podcastLogoPath)): ?>
     <div id="logo-container">
         <img src="<?php echo $logoFile; ?>" alt="Podcast Logo">
     </div>
-<?php endif; ?>
+    <?php endif; ?>
 
-<!-- filter panel -->
-<div id="filter"><div class="pclogo">Desi Academia Podcast</div><span id="filters">
-<span class="tab active">All Episodes</span>
-<span class="tab" style="display: none;">Posts</span>
-<span class="tab" style="display: none;">Podcasts</span>
-<select name="changechannel" style="display: none;"><!-- options here --></select></span></div>
-<div id="wrap">
-<!-- posts here -->
-</div>
+    <!-- Filter panel -->
+    <div id="filter">
+        <div class="pclogo">Desi Academia Podcast</div>
+        <span id="filters">
+            <span class="tab active">All Episodes</span>
+            <span class="tab" style="display: none;">Posts</span>
+            <span class="tab" style="display: none;">Podcasts</span>
+            <select name="changechannel" style="display: none;"><!-- options here --></select>
+        </span>
     </div>
+</div>
+
+<!-- Main content -->
+<div id="wrap">
+    <!-- posts here -->
+</div>
+
+</div> <!-- end pcwrap -->
 <div id="floating_player">
 <div class="player_meta"><button id="playpausebutton">Play</button><span id="title">Not Playing</span> <button id="speed">1x</button><button id="plus30">+30s</button></div>
   <div id="timeline_wrap">
