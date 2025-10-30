@@ -18,6 +18,11 @@
 
 <!-- Sidebar container: logo above filter panel -->
 <div id="sidebar-container">
+    <!-- Logo container -->
+    <div id="logo-container">
+        <img src="https://raw.githubusercontent.com/desiacadpod/rsstea/main/desi-academic-podcast.png" alt="Desi Academia Podcast">
+    </div>
+
     <!-- Filter panel -->
     <div id="filter">
         <div class="pclogo">Desi Academia Podcast</div>
@@ -55,13 +60,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
         // Sanitize for filename
         const safeName = podcastName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
-        const logoF = safeName + '.png';
-        console.log('Computed logo file:', logoF);
-
-        // Prepend raw GitHub URL
-        const githubRawBase = 'https://raw.githubusercontent.com/desiacadpod/rsstea/main/';
-        const logoFile = githubRawBase + logoF;
-        console.log('Computed logo URL:', logoFile);
+        const logoFile = safeName + '.png';
+        console.log('Computed logo file:', logoFile);
 
         // Create the logo container if it doesn't exist
         let logoContainer = document.getElementById('logo-container');
@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         // Check if PNG exists
-        fetch(logoURL, { method: 'HEAD' })
+        fetch(logoFile, { method: 'HEAD' })
           .then(res => {
             if (res.ok) {
               const img = document.createElement('img');
