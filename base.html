@@ -28,26 +28,37 @@
             <select name="changechannel" style="display: none;"><!-- options here --></select>
         </span>
     </div>
+</div>
 
-    <script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar-container');
+    if (!sidebar) {
+        console.error('sidebar-container not found');
+        return;
+    }
+
     fetch('feed.json')
       .then(resp => resp.json())
       .then(data => {
-        if (!data.episodes || data.episodes.length === 0) return;
+        if (!data.episodes || data.episodes.length === 0) {
+            console.warn('No episodes found in feed.json');
+            return;
+        }
 
         const firstLink = data.episodes[0].link || '';
-        let podcastName = 'podcast';
+        console.log('First episode link:', firstLink);
 
-        // Extract podcast name from URL path like feed.php logic
+        let podcastName = 'podcast';
         const match = firstLink.match(/\/pod\/show\/([^\/]+)\//);
         if (match && match[1]) podcastName = match[1];
 
         // Sanitize for filename
         const safeName = podcastName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
         const logoFile = safeName + '.png';
+        console.log('Computed logo file:', logoFile);
 
         // Create the logo container if it doesn't exist
-        const sidebar = document.getElementById('sidebar-container');
         let logoContainer = document.getElementById('logo-container');
         if (!logoContainer) {
             logoContainer = document.createElement('div');
@@ -62,9 +73,9 @@
               const img = document.createElement('img');
               img.src = logoFile;
               img.alt = podcastName;
-              img.style.maxWidth = '140px'; // optional styling
+              img.style.maxWidth = '140px';
               logoContainer.appendChild(img);
-              console.log('Logo appended:', logoFile);
+              console.log('Logo appended successfully:', logoFile);
             } else {
               console.warn('Logo file not found:', logoFile);
             }
@@ -72,8 +83,8 @@
           .catch(err => console.error('Error checking logo file:', err));
       })
       .catch(err => console.error('Failed to load feed.json:', err));
-    </script>
-</div>
+});
+</script>
 
 <!-- Main content -->
 <div id="wrap">
