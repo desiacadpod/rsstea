@@ -19,7 +19,6 @@
 <!-- Sidebar container: logo above filter panel -->
 <div id="sidebar-container">
     <!-- Logo container -->
-    <div id="logo-container"></div>
     <!-- Script to fetch image name and validate using the RSS feed-->
     <script>
     fetch('feed.json')
@@ -43,11 +42,14 @@
         fetch(logoFile, { method: 'HEAD' })
           .then(res => {
             if (res.ok) {
-              const logoContainer = document.getElementById('logo-container');
+              const sidebar = document.getElementById('sidebar-container');
+              const logoContainer = document.createElement('div');
+              logoContainer.id = 'logo-container';
               const img = document.createElement('img');
               img.src = logoFile;
               img.alt = podcastName;
               logoContainer.appendChild(img);
+              sidebar.insertBefore(logoContainer, sidebar.firstChild);
             } else {
               console.warn('Logo file not found:', logoFile);
             }
