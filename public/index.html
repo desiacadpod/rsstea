@@ -14,6 +14,20 @@
 <body>
 <div id="header">Desi Academia Podcast</div>
     <div id="pcwrap">
+<?php
+    // Construct the logo filename (same logic as feed.php)
+    $podcastLogoPath = __DIR__ . '/podcast_name.png';
+    $logoFile = basename($podcastLogoPath);
+?>
+
+<!-- Logo container  -->
+<?php if (file_exists($podcastLogoPath)): ?>
+    <div id="logo-container">
+        <img src="<?php echo $logoFile; ?>" alt="Podcast Logo">
+    </div>
+<?php endif; ?>
+
+<!-- filter panel -->
 <div id="filter"><div class="pclogo">Desi Academia Podcast</div><span id="filters">
 <span class="tab active">All Episodes</span>
 <span class="tab" style="display: none;">Posts</span>
