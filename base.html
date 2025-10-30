@@ -17,9 +17,29 @@
 <div id="pcwrap">
 
 <?php
-    // Construct the logo filename (same logic as feed.php)
-    $podcastLogoPath = __DIR__ . '/podcast_name.png';
-    $logoFile = basename($podcastLogoPath);
+// --- Match feed.php logic to generate the exact logo filename ---
+$response = str_ireplace(
+    array("media:thumbnail", '<media:group>', '</media:group>'),
+    array("thumbnail", '', ''),
+    $response
+);
+$feed = @simplexml_load_string($response);
+
+if ($feed) {
+    $podcastName = isset($feed->channel->title) ? (string)$feed->channel->title : 'podcast';
+    $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
+    $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';  // file system path
+    $logoUrl = $safeName . '.png';                           // browser URL
+
+    // Only display if the file exists
+    if (file_exists($podcastLogoPath)):
+?>
+<div id="logo-container">
+    <img src="<?php echo $logoUrl; ?>" alt="<?php echo htmlspecialchars($podcastName); ?>">
+</div>
+<?php
+    endif;
+}
 ?>
 
 <!-- Sidebar container: logo above filter panel -->
