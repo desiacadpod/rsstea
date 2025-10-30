@@ -504,6 +504,17 @@ span.tab:hover,select:hover {
         padding: 10px 0;
     }
 }
+/* Make logo and filter stack vertically */
+#sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* center logo horizontally */
+}
+
+/* Optional: make filter full width under logo */
+#filter {
+    width: 100%;
+}
 
 
 /* Remove left panel entirely */
