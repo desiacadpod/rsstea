@@ -47,7 +47,26 @@ jobs:
       
       - name: Run feeds.php
         run: php feeds.php
-      
+
+      - name: Check expected podcast logo
+        run: |
+          LOGO_FILE=$(php -r "
+            \$json = json_decode(file_get_contents('feed.json'), true);
+            if (!empty(\$json[0]['link'])) {
+                \$link = \$json[0]['link'];
+                if (preg_match('#/pod/show/([^/]+)/#', \$link, \$m)) {
+                    \$safeName = strtolower(preg_replace('/[^a-z0-9_-]/', '_', \$m[1]));
+                    echo \$safeName . '.png';
+                }
+            }
+          ")
+          echo "Base.html would look for logo file: $LOGO_FILE"
+          if [ -f "$LOGO_FILE" ]; then
+            echo "Logo file exists: $LOGO_FILE"
+          else
+            echo "Logo file does NOT exist: $LOGO_FILE"
+          fi
+          
       - name: Commit files
         run: |
           git config user.name github-actions
