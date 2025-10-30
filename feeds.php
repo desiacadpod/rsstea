@@ -30,9 +30,21 @@ echo "\n"."Getting feed from: ". $url." \n";
     $response = str_ireplace(array("media:thumbnail",'<media:group>','</media:group>'), array("thumbnail",'',''), $response);
     $feed = simplexml_load_string($response);
     
-    if ($feed) {
-        $podcastName = isset($feed->channel->title) ? (string)$feed->channel->title : 'podcast';
+    if ($feed && isset($feed->channel->item[0]->link)) {
+        // Get first <item><link>
+        $firstLink = (string)$feed->channel->item[0]->link;
+    
+        // Extract podcast name from URL, e.g., last path segment after "/pod/show/"
+        if (preg_match('#/pod/show/([^/]+)/#', $firstLink, $matches)) {
+            $podcastName = $matches[1];   // e.g., "desi-academic-podcast"
+        } else {
+            $podcastName = 'podcast';
+        }
+    
+        // Sanitize for filename
         $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
+    
+        // Full filesystem path for PNG
         $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';
         
         // --- Fetch podcast logo from <itunes:image> ---
