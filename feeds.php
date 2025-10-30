@@ -33,16 +33,19 @@ echo "\n"."Getting feed from: ". $url." \n";
     if ($feed && isset($feed->channel->item[0]->link)) {
         // Get first <item><link>
         $firstLink = (string)$feed->channel->item[0]->link;
+        echo "\n"."Link assessed: ". $firstLink." \n";
     
         // Extract podcast name from URL, e.g., last path segment after "/pod/show/"
         if (preg_match('#/pod/show/([^/]+)/#', $firstLink, $matches)) {
             $podcastName = $matches[1];   // e.g., "desi-academic-podcast"
+            echo "\n"."Podcast name found: ". $podcastName." \n";
         } else {
             $podcastName = 'podcast';
         }
     
         // Sanitize for filename
         $safeName = preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($podcastName));
+        echo "\n"."Final file name: ". $safeName." \n";
     
         // Full filesystem path for PNG
         $podcastLogoPath = __DIR__ . '/' . $safeName . '.png';
