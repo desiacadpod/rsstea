@@ -18,15 +18,23 @@
 
 <!-- Sidebar container: logo above filter panel -->
 <div id="sidebar-container">
-    <!-- Logo container -->
-    <!-- Script to fetch image name and validate using the RSS feed-->
+    <!-- Filter panel -->
+    <div id="filter">
+        <div class="pclogo">Desi Academia Podcast</div>
+        <span id="filters">
+            <span class="tab active">All Episodes</span>
+            <span class="tab" style="display: none;">Posts</span>
+            <span class="tab" style="display: none;">Podcasts</span>
+            <select name="changechannel" style="display: none;"><option value="All">All Channels</option><option value="Desi Academia Podcast">Desi Academia Podcast</option></select>
+        </span>
+    </div>
+
     <script>
     fetch('feed.json')
       .then(resp => resp.json())
       .then(data => {
         if (!data.episodes || data.episodes.length === 0) return;
 
-        // Take the first <item> link
         const firstLink = data.episodes[0].link || '';
         let podcastName = 'podcast';
 
@@ -38,18 +46,25 @@
         const safeName = podcastName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
         const logoFile = safeName + '.png';
 
-        // Check if PNG exists in folder
+        // Create the logo container if it doesn't exist
+        const sidebar = document.getElementById('sidebar-container');
+        let logoContainer = document.getElementById('logo-container');
+        if (!logoContainer) {
+            logoContainer = document.createElement('div');
+            logoContainer.id = 'logo-container';
+            sidebar.insertBefore(logoContainer, sidebar.firstChild);
+        }
+
+        // Check if PNG exists
         fetch(logoFile, { method: 'HEAD' })
           .then(res => {
             if (res.ok) {
-              const sidebar = document.getElementById('sidebar-container');
-              const logoContainer = document.createElement('div');
-              logoContainer.id = 'logo-container';
               const img = document.createElement('img');
               img.src = logoFile;
               img.alt = podcastName;
+              img.style.maxWidth = '140px'; // optional styling
               logoContainer.appendChild(img);
-              sidebar.insertBefore(logoContainer, sidebar.firstChild);
+              console.log('Logo appended:', logoFile);
             } else {
               console.warn('Logo file not found:', logoFile);
             }
@@ -58,17 +73,6 @@
       })
       .catch(err => console.error('Failed to load feed.json:', err));
     </script>
-
-    <!-- Filter panel -->
-    <div id="filter">
-        <div class="pclogo">Desi Academia Podcast</div>
-        <span id="filters">
-            <span class="tab active">All Episodes</span>
-            <span class="tab" style="display: none;">Posts</span>
-            <span class="tab" style="display: none;">Podcasts</span>
-            <select name="changechannel" style="display: none;"><option value="All">All Channels</option><option value="Desi Academia Podcast">Desi Academia Podcast</option></select>
-        </span>
-    </div>
 </div>
 
 <!-- Main content -->
