@@ -1,477 +1,472 @@
-<!DOCTYPE html><html><head>
-    <title>Desi Academia Podcast </title>
-    <meta name="description" content="Tune in to hear about cool South Asian researchers and their amazing work!."/>
-    <link rel="shortcut icon" href="favicon.ico"> 
-  <link rel="icon" href="favicon.png">
-<link rel="manifest" href="manifest.json" />
- <meta name="apple-mobile-web-app-capable" content="yes" />
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Desi Academia Podcast</title>
+    <meta
+      name="description"
+      content="Tune in to hear about cool South Asian researchers and their amazing work!."
+    />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="rdx" />
-    <meta   name="apple-mobile-web-app-status-bar-style" content="default" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="theme.css" type="text/css">
-</head>
-<body>
-<div id="header">Desi Academia Podcast</div>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <div id="header">Desi Academia Podcast</div>
 
-<div id="pcwrap">
+    <div id="pcwrap">
+      <!-- Sidebar container: logo above filter panel -->
+      <div id="sidebar-container">
+        <!-- Logo container -->
+        <div id="logo-container">
+          <img
+            src="https://raw.githubusercontent.com/desiacadpod/rsstea/main/desi-academic-podcast.png"
+            alt="Desi Academia Podcast"
+          />
+        </div>
 
-<!-- Sidebar container: logo above filter panel -->
-<div id="sidebar-container">
-    <!-- Logo container -->
-    <div id="logo-container">
-        <img src="https://raw.githubusercontent.com/desiacadpod/rsstea/main/desi-academic-podcast.png" alt="Desi Academia Podcast">
-    </div>
-
-    <!-- Filter panel -->
-    <div id="filter">
-        <div class="pclogo">Desi Academia Podcast</div>
-        <span id="filters">
+        <!-- Filter panel -->
+        <div id="filter">
+          <div class="pclogo">Desi Academia Podcast</div>
+          <span id="filters">
             <span class="tab active">All Episodes</span>
-            <span class="tab" style="display: none;">Posts</span>
-            <span class="tab" style="display: none;">Podcasts</span>
-            <select name="changechannel" style="display: none;"><!-- options here --></select>
-        </span>
-    </div>
-</div>
+            <span class="tab">Tweets</span>
+            <span class="tab">Podcasts</span>
+            <!-- <span class="tab">Anything</span> -->
+            <select name="changechannel" style="display: none">
+              <!-- options here -->
+            </select>
+          </span>
+        </div>
+      </div>
 
-<script>
-window.addEventListener('DOMContentLoaded', () => {
-    const sidebar = document.getElementById('sidebar-container');
-    if (!sidebar) {
-        console.error('sidebar-container not found');
-        return;
-    }
-
-    fetch('feed.json')
-      .then(resp => resp.json())
-      .then(data => {
-        if (!data.episodes || data.episodes.length === 0) {
-            console.warn('No episodes found in feed.json');
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const sidebar = document.getElementById("sidebar-container");
+          if (!sidebar) {
+            console.error("sidebar-container not found");
             return;
-        }
+          }
 
-        const firstLink = data.episodes[0].link || '';
-        console.log('First episode link:', firstLink);
+          fetch("feed.json")
+            .then((resp) => resp.json())
+            .then((data) => {
+              if (!data.episodes || data.episodes.length === 0) {
+                console.warn("No episodes found in feed.json");
+                return;
+              }
 
-        let podcastName = 'podcast';
-        const match = firstLink.match(/\/pod\/show\/([^\/]+)\//);
-        if (match && match[1]) podcastName = match[1];
+              const firstLink = data.episodes[0].link || "";
+              console.log("First episode link:", firstLink);
 
-        // Sanitize for filename
-        const safeName = podcastName.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
-        const logoFile = safeName + '.png';
-        console.log('Computed logo file:', logoFile);
+              let podcastName = "podcast";
+              const match = firstLink.match(/\/pod\/show\/([^\/]+)\//);
+              if (match && match[1]) podcastName = match[1];
 
-        // Create the logo container if it doesn't exist
-        let logoContainer = document.getElementById('logo-container');
-        if (!logoContainer) {
-            logoContainer = document.createElement('div');
-            logoContainer.id = 'logo-container';
-            sidebar.insertBefore(logoContainer, sidebar.firstChild);
-        }
+              // Sanitize for filename
+              const safeName = podcastName
+                .toLowerCase()
+                .replace(/[^a-z0-9_-]/g, "_");
+              const logoFile = safeName + ".png";
+              console.log("Computed logo file:", logoFile);
 
-        // Check if PNG exists
-        fetch(logoFile, { method: 'HEAD' })
-          .then(res => {
-            if (res.ok) {
-              const img = document.createElement('img');
-              img.src = logoFile;
-              img.alt = podcastName;
-              img.style.maxWidth = '140px';
-              logoContainer.appendChild(img);
-              console.log('Logo appended successfully:', logoFile);
-            } else {
-              console.warn('Logo file not found:', logoFile);
-            }
-          })
-          .catch(err => console.error('Error checking logo file:', err));
-      })
-      .catch(err => console.error('Failed to load feed.json:', err));
-});
-</script>
-<!-- Main content -->
-<div id="wrap">
-    <!-- posts here -->
-</div>
+              // Create the logo container if it doesn't exist
+              let logoContainer = document.getElementById("logo-container");
+              if (!logoContainer) {
+                logoContainer = document.createElement("div");
+                logoContainer.id = "logo-container";
+                sidebar.insertBefore(logoContainer, sidebar.firstChild);
+              }
 
-</div> <!-- end pcwrap -->
-<div id="floating_player">
-<div class="player_meta"><button id="playpausebutton">Play</button><span id="title">Not Playing</span> <button id="speed">1x</button><button id="plus30">+30s</button></div>
-  <div id="timeline_wrap">
-  <ul id="chapters"></ul>
-    <span id="current_time"></span>
-    <span id="timeline">
-<input type="range" id="seekbar" min="0" max="100" step="0.1">
-</span>
-    <span id="duration"></span>
-  </div>
-</div>
-
-<script>
-const tabs = document.querySelectorAll('.tab');
-const posts = document.querySelectorAll('.post');
-const select = document.querySelector('select[name="changechannel"]');
-let selectedChannel = 'All Episodes';
-
-select.addEventListener('change', () =>
-{
-    selectedChannel = select.value;
-    posts.forEach(post =>
-    {
-        const channel = post.getAttribute('data-channel');
-        if (selectedChannel === 'All Episodes' || channel === selectedChannel)
-        {
-            post.style.display = 'block';
-        }
-        else
-        {
-            post.style.display = 'none';
-        }
-    });
-    tabs.forEach(tab =>
-    {
-        tab.classList.remove('active');
-        select.classList.add('selected');
-    });
-
-});
-
-tabs.forEach(tab =>
-{
-    tab.addEventListener('click', () =>
-    {
-        tabs.forEach(tab =>
-        {
-            tab.classList.remove('active');
+              // Check if PNG exists
+              fetch(logoFile, { method: "HEAD" })
+                .then((res) => {
+                  if (res.ok) {
+                    const img = document.createElement("img");
+                    img.src = logoFile;
+                    img.alt = podcastName;
+                    img.style.maxWidth = "140px";
+                    logoContainer.appendChild(img);
+                    console.log("Logo appended successfully:", logoFile);
+                  } else {
+                    console.warn("Logo file not found:", logoFile);
+                  }
+                })
+                .catch((err) =>
+                  console.error("Error checking logo file:", err)
+                );
+            })
+            .catch((err) => console.error("Failed to load feed.json:", err));
         });
-        tab.classList.add('active');
-        const filter = tab.textContent.trim();
-        posts.forEach(post =>
-        {
-            const audio = parseInt(post.getAttribute('data-audio'));
-            const channel = post.getAttribute('data-channel');
-            if (filter === 'All Episodes' || (filter === 'Posts' && audio === 0) || (filter === 'Podcasts' && audio === 1))
-            {
-                post.style.display = 'block';
+      </script>
+      <!-- Main content -->
+      <div id="wrap">
+        <!-- posts here -->
+      </div>
+      <!-- Tweets content -->
+      <div id="tweets-wrap" style="display: none">
+        <!-- tweets here -->
+      </div>
+    </div>
+    <!-- end pcwrap -->
+    <div id="floating_player">
+      <div class="player_meta">
+        <button id="playpausebutton">Play</button
+        ><span id="title">Not Playing</span> <button id="speed">1x</button
+        ><button id="plus30">+30s</button>
+      </div>
+      <div id="timeline_wrap">
+        <ul id="chapters"></ul>
+        <span id="current_time"></span>
+        <span id="timeline">
+          <input type="range" id="seekbar" min="0" max="100" step="0.1" />
+        </span>
+        <span id="duration"></span>
+      </div>
+    </div>
+
+    <script>
+      const tabs = document.querySelectorAll(".tab");
+      const posts = document.querySelectorAll(".post");
+      const select = document.querySelector('select[name="changechannel"]');
+      let selectedChannel = "All Episodes";
+
+      select.addEventListener("change", () => {
+        selectedChannel = select.value;
+        posts.forEach((post) => {
+          const channel = post.getAttribute("data-channel");
+          if (
+            selectedChannel === "All Episodes" ||
+            channel === selectedChannel
+          ) {
+            post.style.display = "block";
+          } else {
+            post.style.display = "none";
+          }
+        });
+        tabs.forEach((tab) => {
+          tab.classList.remove("active");
+          select.classList.add("selected");
+        });
+      });
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((tab) => {
+            tab.classList.remove("active");
+          });
+          tab.classList.add("active");
+          const filter = tab.textContent.trim();
+          const wrap = document.getElementById("wrap");
+          const tweetsWrap = document.getElementById("tweets-wrap");
+
+          if (filter === "Tweets") {
+            // Show tweets, hide posts
+            wrap.style.display = "none";
+            tweetsWrap.style.display = "block";
+            // Load Twitter widgets if not already loaded
+            if (typeof twttr !== "undefined" && twttr.widgets) {
+              twttr.widgets.load();
             }
-            else
-            {
-                post.style.display = 'none';
-            }
+          } else {
+            // Show posts, hide tweets
+            wrap.style.display = "block";
+            tweetsWrap.style.display = "none";
+            posts.forEach((post) => {
+              const audio = parseInt(post.getAttribute("data-audio"));
+              const channel = post.getAttribute("data-channel");
+              if (
+                filter === "All Episodes" ||
+                (filter === "Posts" && audio === 0) ||
+                (filter === "Podcasts" && audio === 1)
+              ) {
+                post.style.display = "block";
+              } else {
+                post.style.display = "none";
+              }
+            });
+          }
+
+          select.value = "All Episodes";
+          select.classList.remove("selected");
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const btns = document.querySelectorAll(".audio button[data-aid]");
+        let caudio = null;
+        let ppBtn = null;
+        const fpBtn = document.querySelector(
+          "#floating_player #playpausebutton"
+        );
+        const tl = document.querySelector("#timeline");
+        const fsb = document.querySelector("#seekbar");
+
+        fpBtn.addEventListener("click", function () {
+          togglePP();
         });
 
-        select.value = 'All Episodes';
-        select.classList.remove('selected');
-    });
-});
-
-
-document.addEventListener('DOMContentLoaded', function ()
-{
-    const btns = document.querySelectorAll('.audio button[data-aid]');
-    let caudio = null;
-    let ppBtn = null;
-    const fpBtn = document.querySelector('#floating_player #playpausebutton');
-    const tl = document.querySelector('#timeline');
-    const fsb = document.querySelector('#seekbar');
-
-    fpBtn.addEventListener('click', function ()
-    {
-        togglePP();
-    });
-
-    function togglePP()
-    {
-        if (caudio && caudio.paused)
-        {
+        function togglePP() {
+          if (caudio && caudio.paused) {
             caudio.play();
-        }
-        else if (caudio)
-        {
+          } else if (caudio) {
             caudio.pause();
+          }
         }
-    }
 
-    tl.addEventListener('input', function (e)
-    {
-        const seekPercentage = fsb.value;
-        const seekTime = (seekPercentage / 100) * caudio.duration;
-        caudio.currentTime = seekTime;
-    });
-
-    const speeds = [1, 1.2, 1.5, 1.75, 2];
-    let currentSpeedIndex = 0;
-    document.getElementById('speed').addEventListener('click', () =>
-    {
-        currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
-        const speed = speeds[currentSpeedIndex];
-        caudio.playbackRate = speed;
-        document.getElementById('speed').innerText = speed + 'x';
-        updatePositionState();
-    });
-    document.getElementById('plus30').addEventListener('click', () =>
-    {
-        caudio.currentTime += 30;
-    });
-
-    function updateAudioTime()
-    {
-        const currentTime = caudio.currentTime;
-        const formattedCurrentTime = formatTime(currentTime);
-        const formattedDuration = formatTime(caudio.duration);
-
-        document.getElementById('current_time').textContent = formattedCurrentTime;
-        document.getElementById('duration').textContent = formattedDuration;
-        const progress = (currentTime / caudio.duration) * 100;
-        fsb.value = progress;
-    }
-
-    function playTime()
-    {
-        navigator.mediaSession.playbackState = 'playing';
-        fpBtn.classList.toggle('playing');
-        ppBtn.classList.toggle('playing');
-        updatePositionState();
-    }
-
-    function pauseTime()
-    {
-        navigator.mediaSession.playbackState = 'paused';
-        fpBtn.classList.toggle('playing');
-        ppBtn.classList.toggle('playing');
-        updatePositionState();
-    }
-
-
-    function formatTime(time)
-    {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        return ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
-    }
-
-    btns.forEach(function (btn)
-    {
-        btn.addEventListener('click', function ()
-        {
-            const aid = this.getAttribute('data-aid');
-            const audioElem = document.querySelector('audio[aid="' + aid + '"]');
-            changePlayback(audioElem);
+        tl.addEventListener("input", function (e) {
+          const seekPercentage = fsb.value;
+          const seekTime = (seekPercentage / 100) * caudio.duration;
+          caudio.currentTime = seekTime;
         });
-    });
 
-    function changePlayback(audioElem)
-    {
-        const prevPPBtn = ppBtn;
-        ppBtn = document.querySelector('[data-aid="' + audioElem.getAttribute('aid') + '"]');
-        const src = audioElem.getAttribute('src');
+        const speeds = [1, 1.2, 1.5, 1.75, 2];
+        let currentSpeedIndex = 0;
+        document.getElementById("speed").addEventListener("click", () => {
+          currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+          const speed = speeds[currentSpeedIndex];
+          caudio.playbackRate = speed;
+          document.getElementById("speed").innerText = speed + "x";
+          updatePositionState();
+        });
+        document.getElementById("plus30").addEventListener("click", () => {
+          caudio.currentTime += 30;
+        });
 
-        if (caudio && caudio !== audioElem)
-        {
+        function updateAudioTime() {
+          const currentTime = caudio.currentTime;
+          const formattedCurrentTime = formatTime(currentTime);
+          const formattedDuration = formatTime(caudio.duration);
+
+          document.getElementById("current_time").textContent =
+            formattedCurrentTime;
+          document.getElementById("duration").textContent = formattedDuration;
+          const progress = (currentTime / caudio.duration) * 100;
+          fsb.value = progress;
+        }
+
+        function playTime() {
+          navigator.mediaSession.playbackState = "playing";
+          fpBtn.classList.toggle("playing");
+          ppBtn.classList.toggle("playing");
+          updatePositionState();
+        }
+
+        function pauseTime() {
+          navigator.mediaSession.playbackState = "paused";
+          fpBtn.classList.toggle("playing");
+          ppBtn.classList.toggle("playing");
+          updatePositionState();
+        }
+
+        function formatTime(time) {
+          const minutes = Math.floor(time / 60);
+          const seconds = Math.floor(time % 60);
+          return ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
+        }
+
+        btns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            const aid = this.getAttribute("data-aid");
+            const audioElem = document.querySelector(
+              'audio[aid="' + aid + '"]'
+            );
+            changePlayback(audioElem);
+          });
+        });
+
+        function changePlayback(audioElem) {
+          const prevPPBtn = ppBtn;
+          ppBtn = document.querySelector(
+            '[data-aid="' + audioElem.getAttribute("aid") + '"]'
+          );
+          const src = audioElem.getAttribute("src");
+
+          if (caudio && caudio !== audioElem) {
             caudio.pause();
-            caudio.removeEventListener('timeupdate', updateAudioTime);
-            caudio.removeEventListener('play', playTime);
-            caudio.removeEventListener('pause', pauseTime);
+            caudio.removeEventListener("timeupdate", updateAudioTime);
+            caudio.removeEventListener("play", playTime);
+            caudio.removeEventListener("pause", pauseTime);
 
-            prevPPBtn.classList.remove('playing');
-            fpBtn.classList.remove('playing');
-            fsb.value = '0';
+            prevPPBtn.classList.remove("playing");
+            fpBtn.classList.remove("playing");
+            fsb.value = "0";
 
-            if (audioElem.readyState >= 1)
-            {
+            if (audioElem.readyState >= 1) {
+              startPlayback(audioElem);
+            } else {
+              audioElem.addEventListener("loadedmetadata", function () {
                 startPlayback(audioElem);
+              });
             }
-            else
-            {
-                audioElem.addEventListener('loadedmetadata', function ()
-                {
-                    startPlayback(audioElem);
-                });
-            }
-        }
-        else if (caudio)
-        {
+          } else if (caudio) {
             togglePP();
-        }
-        else
-        {
-            if (audioElem.readyState >= 1)
-            {
+          } else {
+            if (audioElem.readyState >= 1) {
+              startPlayback(audioElem);
+            } else {
+              audioElem.addEventListener("loadedmetadata", function () {
                 startPlayback(audioElem);
+              });
             }
-            else
-            {
-                audioElem.addEventListener('loadedmetadata', function ()
-                {
-                    startPlayback(audioElem);
-                });
-            }
+          }
         }
-    }
 
-    function updatePositionState()
-    {
-        navigator.mediaSession.setPositionState(
-        {
+        function updatePositionState() {
+          navigator.mediaSession.setPositionState({
             duration: caudio.duration,
             playbackRate: caudio.playbackRate,
             position: caudio.currentTime,
-        });
-    }
+          });
+        }
 
-    function startPlayback(audioElem)
-    {
-
-        const fp = document.querySelector('#floating_player');
-        const closestPost = audioElem.closest('.post');
-        document.querySelectorAll('.post.nowplaying').forEach(e => e.classList.remove('nowplaying'));
-        closestPost.classList.add('nowplaying');
-        const h2text = closestPost.querySelector('h2').textContent;
-        document.getElementById('title').innerHTML = h2text;
-        caudio = audioElem;
-        caudio.addEventListener('timeupdate', updateAudioTime);
-        caudio.addEventListener('play', playTime);
-        caudio.addEventListener('pause', pauseTime);
-        const audioDur = caudio.duration;
-        const formattedDur = formatTime(audioDur);
-        document.getElementById('duration').textContent = formattedDur;
-        fp.style.display = 'block';
-        setTimeout(function ()
-        {
+        function startPlayback(audioElem) {
+          const fp = document.querySelector("#floating_player");
+          const closestPost = audioElem.closest(".post");
+          document
+            .querySelectorAll(".post.nowplaying")
+            .forEach((e) => e.classList.remove("nowplaying"));
+          closestPost.classList.add("nowplaying");
+          const h2text = closestPost.querySelector("h2").textContent;
+          document.getElementById("title").innerHTML = h2text;
+          caudio = audioElem;
+          caudio.addEventListener("timeupdate", updateAudioTime);
+          caudio.addEventListener("play", playTime);
+          caudio.addEventListener("pause", pauseTime);
+          const audioDur = caudio.duration;
+          const formattedDur = formatTime(audioDur);
+          document.getElementById("duration").textContent = formattedDur;
+          fp.style.display = "block";
+          setTimeout(function () {
             fp.classList.add("show");
-        }, 10);
-        caudio.play();
+          }, 10);
+          caudio.play();
 
-        document.getElementById('speed').innerText = caudio.playbackRate + 'x';
-        const mediaAlbumArt = 'https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url=' + encodeURIComponent(closestPost.querySelector('img').src) + '&container=ig';
-        navigator.mediaSession.metadata = new MediaMetadata(
-        {
+          document.getElementById("speed").innerText =
+            caudio.playbackRate + "x";
+          const mediaAlbumArt =
+            "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?url=" +
+            encodeURIComponent(closestPost.querySelector("img").src) +
+            "&container=ig";
+          navigator.mediaSession.metadata = new MediaMetadata({
             title: h2text,
-            artist: closestPost.querySelector('.channel').textContent,
+            artist: closestPost.querySelector(".channel").textContent,
             album: "rssTea",
             artwork: [
-        //    {
-        //        src: mediaAlbumArt + '&resize_w=128&resize_h=128',
-        //        sizes: "128x128",
-        //        type: "image/png",
-        //    },
-        //    {
-        //        src: mediaAlbumArt + '&resize_w=96&resize_h=96',
-        //        sizes: "96x96",
-        //        type: "image/png",
-        //    },
-        //    {
-        //        src: mediaAlbumArt + '&resize_w=192&resize_h=192',
-        //        sizes: "192x192",
-        //        type: "image/png",
-        //    },
-            {
-                src: closestPost.querySelector('img').src,
-            }, ],
-        });
+              //    {
+              //        src: mediaAlbumArt + '&resize_w=128&resize_h=128',
+              //        sizes: "128x128",
+              //        type: "image/png",
+              //    },
+              //    {
+              //        src: mediaAlbumArt + '&resize_w=96&resize_h=96',
+              //        sizes: "96x96",
+              //        type: "image/png",
+              //    },
+              //    {
+              //        src: mediaAlbumArt + '&resize_w=192&resize_h=192',
+              //        sizes: "192x192",
+              //        type: "image/png",
+              //    },
+              {
+                src: closestPost.querySelector("img").src,
+              },
+            ],
+          });
 
-
-        const totalAids = document.querySelectorAll('[data-aid]').length;
-        let nextAid = Math.floor(audioElem.getAttribute('aid')) + 1;
-        let prevAid = Math.floor(audioElem.getAttribute('aid')) - 1;
-        if (nextAid > totalAids - 1)
-        {
+          const totalAids = document.querySelectorAll("[data-aid]").length;
+          let nextAid = Math.floor(audioElem.getAttribute("aid")) + 1;
+          let prevAid = Math.floor(audioElem.getAttribute("aid")) - 1;
+          if (nextAid > totalAids - 1) {
             nextAid = 0;
-        }
-        if (prevAid < 0)
-        {
+          }
+          if (prevAid < 0) {
             prevAid = totalAids - 1;
-        }
+          }
 
-        navigator.mediaSession.setActionHandler("play", () =>
-        {
+          navigator.mediaSession.setActionHandler("play", () => {
             caudio.play();
-        });
-        navigator.mediaSession.setActionHandler("pause", () =>
-        {
+          });
+          navigator.mediaSession.setActionHandler("pause", () => {
             caudio.pause();
-        });
-        // navigator.mediaSession.setActionHandler("seekto", (details) => {
-        //     console.log(details);
-        //  if (details.fastSeek && caudio) {
-        // const newTime = details.seekTime || 0;
-        // caudio.currentTime = newTime;
-        //  } else if (caudio) {
-        // const currentTime = caudio.currentTime || 0;
-        //  const seekTime = details.seekTime || 0;
-        //  caudio.currentTime = currentTime + seekTime;
-        //  }
-        //});
+          });
+          // navigator.mediaSession.setActionHandler("seekto", (details) => {
+          //     console.log(details);
+          //  if (details.fastSeek && caudio) {
+          // const newTime = details.seekTime || 0;
+          // caudio.currentTime = newTime;
+          //  } else if (caudio) {
+          // const currentTime = caudio.currentTime || 0;
+          //  const seekTime = details.seekTime || 0;
+          //  caudio.currentTime = currentTime + seekTime;
+          //  }
+          //});
 
-
-        navigator.mediaSession.setActionHandler(
-            'nexttrack',
-            () =>
-            {
-                changePlayback(document.querySelector("[aid=\"" + nextAid + "\"]"));
-            }
-        );
-        navigator.mediaSession.setActionHandler(
-            'previoustrack',
-            () =>
-            {
-                changePlayback(document.querySelector("[aid=\"" + prevAid + "\"]"));
-            }
-        );
-        navigator.mediaSession.setActionHandler('seekbackward', (details) =>
-        {
-            caudio.currentTime = caudio.currentTime - (details.seekOffset || 10);
+          navigator.mediaSession.setActionHandler("nexttrack", () => {
+            changePlayback(document.querySelector('[aid="' + nextAid + '"]'));
+          });
+          navigator.mediaSession.setActionHandler("previoustrack", () => {
+            changePlayback(document.querySelector('[aid="' + prevAid + '"]'));
+          });
+          navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+            caudio.currentTime =
+              caudio.currentTime - (details.seekOffset || 10);
             updatePositionState();
-        });
-        navigator.mediaSession.setActionHandler('seekforward', (details) =>
-        {
-            caudio.currentTime = caudio.currentTime + (details.seekOffset || 10);
+          });
+          navigator.mediaSession.setActionHandler("seekforward", (details) => {
+            caudio.currentTime =
+              caudio.currentTime + (details.seekOffset || 10);
             updatePositionState();
-        });
+          });
+        }
+      });
 
-    }
+      const deviceWidth = screen.width;
+      const deviceHeight = screen.height;
+      const pixelRatio = window.devicePixelRatio || 1;
 
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
 
-});
+      canvas.width = deviceWidth * pixelRatio;
+      canvas.height = deviceHeight * pixelRatio;
 
+      ctx.fillStyle = "white";
+      if (
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        ctx.fillStyle = "black";
+      }
 
-const deviceWidth = screen.width;
-const deviceHeight = screen.height;
-const pixelRatio = window.devicePixelRatio || 1;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const iconImage = new Image();
+      iconImage.src = "apple-touch-icon.png";
 
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
+      iconImage.onload = function () {
+        const x = (canvas.width - iconImage.width) / 2;
+        const y = (canvas.height - iconImage.height) / 2;
 
-canvas.width = deviceWidth * pixelRatio;
-canvas.height = deviceHeight * pixelRatio;
+        ctx.drawImage(iconImage, x, y);
 
-ctx.fillStyle = 'white';
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)
-{
-    ctx.fillStyle = 'black';
+        const imageDataURL = canvas.toDataURL("image/png");
 
-}
-
-ctx.fillRect(0, 0, canvas.width, canvas.height);
-const iconImage = new Image();
-iconImage.src = 'apple-touch-icon.png';
-
-iconImage.onload = function ()
-{
-    const x = (canvas.width - iconImage.width) / 2;
-    const y = (canvas.height - iconImage.height) / 2;
-
-    ctx.drawImage(iconImage, x, y);
-
-    const imageDataURL = canvas.toDataURL('image/png');
-
-    const appleTouchStartupImageLink = document.createElement('link');
-    appleTouchStartupImageLink.setAttribute('rel', 'apple-touch-startup-image');
-    appleTouchStartupImageLink.setAttribute('href', imageDataURL);
-    document.head.appendChild(appleTouchStartupImageLink);
-};
-        
-</script>
-</body>
+        const appleTouchStartupImageLink = document.createElement("link");
+        appleTouchStartupImageLink.setAttribute(
+          "rel",
+          "apple-touch-startup-image"
+        );
+        appleTouchStartupImageLink.setAttribute("href", imageDataURL);
+        document.head.appendChild(appleTouchStartupImageLink);
+      };
+    </script>
+  </body>
 </html>

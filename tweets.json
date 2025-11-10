@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "1985271993558511816",
+      "text": "The ugliness of it all. https://t.co/dq6vHsWMG9",
+      "edit_history_tweet_ids": ["1985271993558511816"]
+    },
+    {
+      "id": "1985269905281724424",
+      "text": "RT @PhDsofIndia: \"There is an urgent need to stop viewing research in non-STEM disciplines as \"non-research\" as it does not align with the…",
+      "edit_history_tweet_ids": ["1985269905281724424"]
+    },
+    {
+      "id": "1983239694801420305",
+      "text": "Key phrase here is \"I believe\". https://t.co/KcSoId3fTj",
+      "edit_history_tweet_ids": ["1983239694801420305"]
+    },
+    {
+      "id": "1982478497638674898",
+      "text": "\"How can an American be an expert in Hindi literature\"?\n\nBecause we treat Indian scholars like this. https://t.co/dOUD6nOUQA",
+      "edit_history_tweet_ids": ["1982478497638674898"]
+    },
+    {
+      "id": "1982219438037319982",
+      "text": "RT @ranjodhd: All of this is inevitable if we take the customer service practice of the American University market to its logical conclusio…",
+      "edit_history_tweet_ids": ["1982219438037319982"]
+    }
+  ],
+  "meta": {
+    "next_token": "7140dibdnow9c7btw4e30gqf0i94pbjfycygb9866gnci",
+    "result_count": 5,
+    "newest_id": "1985271993558511816",
+    "oldest_id": "1982219438037319982"
+  }
+}

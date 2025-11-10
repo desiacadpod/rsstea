@@ -162,6 +162,21 @@ $outhtml = '';
 $outoptions = '<option value="All">All Channels</option>';
 $outchannels = array();
 $index = 0;
+
+// Generate Tweets HTML content from tweets.json
+$tweetshtml = '';
+$tweetsJsonPath = __DIR__ . '/tweets.json';
+if (file_exists($tweetsJsonPath)) {
+    $tweetsData = json_decode(file_get_contents($tweetsJsonPath), true);
+    if ($tweetsData && isset($tweetsData['data'])) {
+        foreach ($tweetsData['data'] as $tweet) {
+            $tweetId = $tweet['id'];
+            $tweetshtml .= '<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/' . $tweetId . '"></a></blockquote>' . "\n";
+        }
+    }
+}
+$tweetshtml .= '<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>';
+
 foreach($feeda as $post) {
 if(!in_array($post['ch'],$outchannels)) {
 $outoptions .= '<option value="'.$post['ch'].'">'.$post['ch'].'</option>';
@@ -194,7 +209,7 @@ $outhtml .='
 ';}
 file_put_contents('feed.json', json_encode($feeda));
 $template = file_get_contents('base.html');
-$html = str_replace(array('<!-- posts here -->','<!-- options here -->'),array($outhtml,$outoptions),$template);
+$html = str_replace(array('<!-- posts here -->','<!-- options here -->','<!-- tweets here -->'),array($outhtml,$outoptions,$tweetshtml),$template);
 file_put_contents('public/index.html', $html);
 
 
