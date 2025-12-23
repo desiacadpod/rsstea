@@ -560,6 +560,6 @@ button#plus30 {
 }
 
 /* remove 'podcasts tab from left panel */
-.tab-podcasts {
-    display: none;
+#filters .tab-podcasts {
+    display: none !important;
 }
