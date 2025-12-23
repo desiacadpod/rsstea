@@ -86,30 +86,28 @@
                 sidebar.insertBefore(logoContainer, sidebar.firstChild);
               }
 
-              // Check if PNG exists
-              fetch(logoFile, { method: "HEAD" })
-                .then((res) => {
-                  if (res.ok) {
-                    const img = document.createElement("img");
-                    img.src = logoFile;
-                    img.alt = podcastName;
-                    img.style.maxWidth = "140px";
-                    logoContainer.appendChild(img);
-                    console.log("Logo appended successfully:", logoFile);
-                  } else {
-                    console.warn("Logo file not found:", logoFile);
-                  }
-                })
-                .catch((err) =>
-                  console.error("Error checking logo file:", err)
-                );
-            })
-            .catch((err) => console.error("Failed to load feed.json:", err));
-        });
-      </script>
-      <!-- Main content -->
-      <div id="wrap">
-        <div class="post" data-channel="Desi Academia Podcast" data-ts="1766122412" data-audio="1"><div class="leftpan"><img src="https://s2.googleusercontent.com/s2/favicons?domain=podcasters.spotify.com" alt="S10E3: The Second Postdoc- Vatsal's life in outside his Alma Mater "/><span class="domain">podcasters.spotify.com</span></div><div class="rightpan"><div class="feedname"><span class="channel">Desi Academia Podcast</span> &bull; <span class="date">Dec 19, 2025</span></div>
+        // Check if PNG exists
+        fetch(logoFile, { method: 'HEAD' })
+          .then(res => {
+            if (res.ok) {
+              const img = document.createElement('img');
+              img.src = logoFile;
+              img.alt = podcastName;
+              img.style.maxWidth = '140px';
+              logoContainer.appendChild(img);
+              console.log('Logo appended successfully:', logoFile);
+            } else {
+              console.warn('Logo file not found:', logoFile);
+            }
+          })
+          .catch(err => console.error('Error checking logo file:', err));
+      })
+      .catch(err => console.error('Failed to load feed.json:', err));
+});
+</script>
+<!-- Main content -->
+<div id="wrap">
+    <div class="post" data-channel="Desi Academia Podcast" data-ts="1766122412" data-audio="1"><div class="leftpan"><img src="https://s2.googleusercontent.com/s2/favicons?domain=podcasters.spotify.com" alt="S10E3: The Second Postdoc- Vatsal's life in outside his Alma Mater "/><span class="domain">podcasters.spotify.com</span></div><div class="rightpan"><div class="feedname"><span class="channel">Desi Academia Podcast</span> &bull; <span class="date">Dec 19, 2025</span></div>
 <h2><a href="https://podcasters.spotify.com/pod/show/desi-academic-podcast/episodes/S10E3-The-Second-Postdoc--Vatsals-life-in-outside-his-Alma-Mater-e3ciklv" target="_blank">S10E3: The Second Postdoc- Vatsal's life in outside his Alma Mater </a></h2><div class="audio">
 <button data-aid="0">Play</button>
 <audio src="https://anchor.fm/s/b199210c/podcast/play/112857215/https%3A%2F%2Fd3ctxlq1ktw2nl.cloudfront.net%2Fstaging%2F2025-11-19%2Fe8faa65b-6e48-3937-9a98-7da7b20864f2.mp3" preload="metadata" aid="0"  controls></audio></div>
