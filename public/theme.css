@@ -559,3 +559,8 @@ button#plus30 {
     max-width: 800px !important;
   }
 }
+
+/* remove 'podcasts tab from left panel */
+#filters .tab-podcasts {
+    display: none !important;
+}
