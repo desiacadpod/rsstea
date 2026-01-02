@@ -551,6 +551,7 @@ button#plus30 {
   #tweets-wrap {
     max-width: 100%;
     padding: 40px;
+    width: 1024px;
   }
 
   #tweets-wrap .twitter-tweet {

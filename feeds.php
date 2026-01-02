@@ -165,7 +165,7 @@ $index = 0;
 
 // Generate Tweets HTML content from tweets.json
 $tweetshtml = '';
-$tweetsJsonPath = __DIR__ . '/tweets.json';
+$tweetsJsonPath = __DIR__ . '/filtered_tweets.json';
 if (file_exists($tweetsJsonPath)) {
     $tweetsData = json_decode(file_get_contents($tweetsJsonPath), true);
     if ($tweetsData && isset($tweetsData['data'])) {
