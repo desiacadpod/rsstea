@@ -17,10 +17,10 @@ headers = {
 with open("tweets.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-all_tweet_ids = [
-    tweet["id"]
-    for tweet in data.get("data", [])
-]
+# all_tweet_ids = [
+#     tweet["id"]
+#     for tweet in data.get("data", [])
+# ]
 
 
 
@@ -30,7 +30,7 @@ for tweet in data.get("data", []):
     remove_tweet = False
 
     for ref in tweet.get("referenced_tweets", []):
-        if ref.get("type") == "replied_to" and ref.get("id") in all_tweet_ids:
+        if ref.get("type") == "replied_to":
             remove_tweet = True
             break
 

@@ -27,19 +27,6 @@
       ]
     },
     {
-      "id": "2004793561490112830",
-      "edit_history_tweet_ids": [
-        "2004793561490112830"
-      ],
-      "text": "@iron_sulfide_ https://t.co/yMJeKbL9gY",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "2004578664353234973"
-        }
-      ]
-    },
-    {
       "id": "2003999589129769106",
       "edit_history_tweet_ids": [
         "2003999589129769106"
@@ -67,71 +54,6 @@
       ]
     },
     {
-      "id": "2003000061731758582",
-      "edit_history_tweet_ids": [
-        "2003000061731758582"
-      ],
-      "text": "@Kaju_Nut https://t.co/V6ew0jgBs1",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "2002702997302960622"
-        }
-      ]
-    },
-    {
-      "id": "2002993368733790403",
-      "edit_history_tweet_ids": [
-        "2002993368733790403"
-      ],
-      "text": "@goths19 @inaehq1 @iiscbangalore @iiscmte Congratulations!",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "2002647000018461128"
-        }
-      ]
-    },
-    {
-      "id": "2001201509216776454",
-      "edit_history_tweet_ids": [
-        "2001201509216776454"
-      ],
-      "text": "@TathagatEcon Maybe he is talking reading Leon Foucault, \ud83d\ude36\u200d\ud83c\udf2b\ufe0f:\nhttps://t.co/Zilc63boLp",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "2001130787517980876"
-        }
-      ]
-    },
-    {
-      "id": "1995707713565700521",
-      "edit_history_tweet_ids": [
-        "1995707713565700521"
-      ],
-      "text": "@JaaiVipra https://t.co/e9ED2S4FiN",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "1995478525705420866"
-        }
-      ]
-    },
-    {
-      "id": "1995705690665476287",
-      "edit_history_tweet_ids": [
-        "1995705690665476287"
-      ],
-      "text": "@mundcar https://t.co/NoUgJQFfOH",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "1995021874070524362"
-        }
-      ]
-    },
-    {
       "id": "1994647652185608206",
       "edit_history_tweet_ids": [
         "1994647652185608206"
@@ -145,37 +67,11 @@
       ]
     },
     {
-      "id": "1993697705684513269",
-      "edit_history_tweet_ids": [
-        "1993697705684513269"
-      ],
-      "text": "It\u2019s here!! \u2728\n\nMegh, Aditya, and Vatsal are joined by Indranil @academicmargin, as we discuss Megh\u2019s dissertation research. We talk about cooperation, support systems, linguistics, and the impact of AI on the field.\n\nCheck out the episode:\nhttps://t.co/mqTehrekjs",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "1981816681585328621"
-        }
-      ]
-    },
-    {
       "id": "1991393252503875646",
       "edit_history_tweet_ids": [
         "1991393252503875646"
       ],
       "text": "Coming soon! https://t.co/niE1ywcpBc"
-    },
-    {
-      "id": "1991333899784581479",
-      "edit_history_tweet_ids": [
-        "1991333899784581479"
-      ],
-      "text": "Red-pill theory considers women as having the mental capacity of \u201cthe oldest teenager in the house\u201d. But they also power the \u201cmatriarchy\u201d that controls everything. \n\nThis post inadvertently captures the masterful mental gymnastics needed to sustain this bullshit. https://t.co/sSkNq1Faoj",
-      "referenced_tweets": [
-        {
-          "type": "replied_to",
-          "id": "1991333894273265901"
-        }
-      ]
     }
   ]
 }
