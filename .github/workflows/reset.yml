@@ -1,0 +1,29 @@
+name: Reset Git History
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Replace history with current files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git checkout --orphan fresh-main
+          git add -A
+          git commit -m "Initial commit"
+
+          git branch -M main
+          git push --force origin main

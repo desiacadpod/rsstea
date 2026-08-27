@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tweets - Desi Academia Podcast</title>
+    <meta
+      name="description"
+      content="Tweets from Desi Academia Podcast"
+    />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="rdx" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+  </head>
+  <body>
+    <div id="header">Desi Academia Podcast</div>
+
+    <div id="pcwrap">
+      <!-- Sidebar container: logo above navigation panel -->
+      <div id="sidebar-container">
+        <!-- Logo container -->
+        <div id="logo-container">
+          <img
+            src="https://raw.githubusercontent.com/desiacadpod/rsstea/main/desi-academic-podcast.png"
+            alt="Desi Academia Podcast"
+          />
+        </div>
+
+        <!-- Navigation panel -->
+        <div id="filter">
+          <div class="pclogo">Desi Academia Podcast</div>
+          <span id="filters">
+            <a href="about.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none;">About</a>
+            <a href="episodes.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none; border-bottom: 1px solid #ddd;">Episodes</a>
+            <a href="recommendations.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">Recommendations</a>
+            <span style="display: block; padding: 10px; text-align: center; font-weight: bold;">Tweets</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Tweets content -->
+      <div id="wrap">
+        <div id="tweets-loading" style="text-align: center; padding: 40px; color: #999; font-size: 14px;">Loading tweets...</div>
+        <blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2091181097551868282"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2090450621149122904"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2088118236894158977"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2083765168840843584"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2083765398692835336"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2086168869190697141"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2085694688485384380"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2015313113399091612"></a></blockquote>
+<blockquote class="twitter-tweet" data-theme="dark"><p></p><a href="https://twitter.com/desiacadpod/status/2082975532132581552"></a></blockquote>
+
+      </div>
+    </div>
+    <!-- end pcwrap -->
+
+    <script>
+      // Load Twitter widget immediately when page loads
+      function loadTwitterWidget() {
+        if (window.twttr && window.twttr.widgets) {
+          window.twttr.widgets.load();
+          // Hide loading message once tweets are processed
+          const loadingMsg = document.getElementById('tweets-loading');
+          if (loadingMsg) {
+            loadingMsg.style.display = 'none';
+          }
+        }
+      }
+
+      // Try to load immediately when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadTwitterWidget);
+      } else {
+        loadTwitterWidget();
+      }
+
+      // Also try after window load as backup
+      window.addEventListener('load', loadTwitterWidget);
+    </script>
+    <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </body>
+</html>

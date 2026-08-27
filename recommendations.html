@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recommendations - Desi Academia Podcast</title>
+    <meta
+      name="description"
+      content="Book, film, and resource recommendations from Desi Academia Podcast"
+    />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="icon" href="favicon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="rdx" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+    />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="theme.css" type="text/css" />
+    <style>
+      #recommendations-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      #recommendations-content {
+        color: #e0e0e0;
+      }
+      #recommendations-content h1 {
+        font-size: 2.5em;
+        margin-bottom: 1em;
+        color: #ffffff;
+      }
+      #recommendations-content p {
+        color: #e0e0e0;
+      }
+      #recommendations-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      #recommendations-table thead {
+        background-color: #fcb91d;
+        color: #1a1a1a;
+      }
+      #recommendations-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        border-bottom: 2px solid #fcb91d;
+        color: #1a1a1a;
+      }
+      #recommendations-table td {
+        padding: 12px 15px;
+        border-bottom: 1px solid #fcb91d;
+        color: #e0e0e0;
+      }
+      #recommendations-table tbody tr:hover {
+        background-color: rgba(252, 185, 29, 0.1);
+      }
+      #recommendations-table tbody tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      .type-badge {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+      .type-book {
+        color: #64b5f6;
+      }
+      .type-film {
+        color: #ce93d8;
+      }
+      .type-video {
+        color: #ffb74d;
+      }
+      .type-podcast {
+        color: #81c784;
+      }
+      .type-tv {
+        color: #ef9a9a;
+      }
+      .type-writings {
+        color: #4fc3f7;
+      }
+      a {
+        color: #fcb91d;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header">Desi Academia Podcast</div>
+
+    <div id="pcwrap">
+      <!-- Sidebar container: logo above navigation panel -->
+      <div id="sidebar-container">
+        <!-- Logo container -->
+        <div id="logo-container">
+          <img
+            src="https://raw.githubusercontent.com/desiacadpod/rsstea/main/desi-academic-podcast.png"
+            alt="Desi Academia Podcast"
+          />
+        </div>
+
+        <!-- Navigation panel -->
+        <div id="filter">
+          <div class="pclogo">Desi Academia Podcast</div>
+          <span id="filters">
+            <a href="about.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none; border-top: 1px solid #ddd;">About</a>
+            <a href="episodes.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none; border-bottom: 1px solid #ddd;">Episodes</a>
+            <span style="display: block; padding: 10px; text-align: center; font-weight: bold;">Recommendations</span>
+            <a href="tweets.html" style="display: block; padding: 10px; text-align: center; color: #fcb91d; text-decoration: none; border-bottom: 1px solid #ddd;">Tweets</a>
+
+          </span>
+        </div>
+      </div>
+
+      <script>
+        window.addEventListener("DOMContentLoaded", () => {
+          const sidebar = document.getElementById("sidebar-container");
+          if (!sidebar) {
+            console.error("sidebar-container not found");
+            return;
+          }
+
+          fetch("feed.json")
+            .then((resp) => resp.json())
+            .then((data) => {
+              if (!data.episodes || data.episodes.length === 0) {
+                console.warn("No episodes found in feed.json");
+                return;
+              }
+
+              const firstLink = data.episodes[0].link || "";
+
+              let podcastName = "podcast";
+              const match = firstLink.match(/\/pod\/show\/([^\/]+)\//);
+              if (match && match[1]) podcastName = match[1];
+
+              const safeName = podcastName
+                .toLowerCase()
+                .replace(/[^a-z0-9_-]/g, "_");
+              const logoFile = safeName + ".png";
+
+              let logoContainer = document.getElementById("logo-container");
+              if (!logoContainer) {
+                logoContainer = document.createElement("div");
+                logoContainer.id = "logo-container";
+                sidebar.insertBefore(logoContainer, sidebar.firstChild);
+              }
+
+              fetch(logoFile, { method: "HEAD" })
+                .then((res) => {
+                  if (res.ok) {
+                    const img = document.createElement("img");
+                    img.src = logoFile;
+                    img.alt = podcastName;
+                    img.style.maxWidth = "140px";
+                    logoContainer.appendChild(img);
+                  }
+                })
+                .catch((err) =>
+                  console.error("Error checking logo file:", err)
+                );
+            })
+            .catch((err) => console.error("Failed to load feed.json:", err));
+        });
+      </script>
+      <!-- Recommendations content -->
+      <div id="recommendations-content">
+        <h1>Recommended Resources</h1>
+        <p>Curated recommendations from the Desi Academia Podcast community.</p>
+        <!-- recommendations table here -->
+      </div>
+    </div>
+    <!-- end pcwrap -->
+  </body>
+</html>
